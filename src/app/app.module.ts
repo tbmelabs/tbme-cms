@@ -5,7 +5,14 @@ import {HttpModule} from '@angular/http';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatMenuModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatCardModule,
+  MatInputModule
+} from '@angular/material';
 
 import { AppComponent } from './app.component';
 
@@ -20,7 +27,12 @@ import 'hammerjs';
     FormsModule,
     HttpModule,
     FlexLayoutModule,
+    MatButtonModule,
+    MatMenuModule,
     MatToolbarModule,
+    MatIconModule,
+    MatCardModule,
+    MatInputModule,
     BrowserAnimationsModule
   ],
   providers: [],

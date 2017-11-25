@@ -1,3 +1,19 @@
-<mat-toolbar>
-  <span>{{title}}</span>
-</mat-toolbar>
+<div>
+  <mat-toolbar color="primary">
+    <span>{{title}}</span>
+  </mat-toolbar>
+
+  <mat-card>
+    <mat-form-field>
+      <textarea matInput placeholder="Test README.md input" matTextareaAutosize matAutosizeMinRows="2"
+                matAutosizeMaxRows="5"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary">Save</button>
+  </mat-card>
+
+  <span class="done">
+    <button mat-fab>
+      <mat-icon>check circle</mat-icon>
+    </button>
+  </span>
+</div>
