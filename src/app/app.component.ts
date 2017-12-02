@@ -32,8 +32,8 @@ export class AppComponent implements OnInit {
 
   getFileContent() {
     let self =this;
-    let repo = this.gh.getRepo('mirioeggmann','blog.mirioeggmann.ch');
-    repo.getSha('master','test.md')
+    let repo = this.gh.getRepo('mirioeggmann','mirioeggmann.ch');
+    repo.getSha('master','about.md')
       .then(function({data: answer}) {
         console.log(answer.sha);
         repo.getBlob(answer.sha).then(function({data: answerBlob}) {
@@ -45,11 +45,11 @@ export class AppComponent implements OnInit {
 
   writeFileContent() {
     let self =this;
-    let repo = this.gh.getRepo('mirioeggmann','blog.mirioeggmann.ch');
+    let repo = this.gh.getRepo('mirioeggmann','mirioeggmann.ch');
     let options = {
       encode: true
     };
-    repo.writeFile('master','test.md',self.content,'test api', options)
+    repo.writeFile('master','about.md',self.content,'test api', options)
       .then(function({data: answer}) {
         console.log(answer);
       });
