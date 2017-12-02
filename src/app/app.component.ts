@@ -12,31 +12,44 @@ export class AppComponent implements OnInit {
 
   title = 'TBME CMS';
   token = CONFIG.token;
+  content;
+
+  private gh;
 
   ngOnInit(): void {
-    // unauthenticated client
-
-    const gh = new GitHub({
+    this.gh = new GitHub({
       token: this.token
     });
 
-    const repo = gh.getRepo('mirioeggmann','blog.mirioeggmann.ch');
-    repo.getContents('master','_posts',false)
-      .then(function({data: repoContents}) {
-        console.log(repoContents);
-      });
-
-    const me = gh.getUser();
+    const me = this.gh.getUser();
     me.listRepos()
       .then(function({data: reposJson}) {
         console.log(reposJson[0]);
       });
 
-    let options = {
-      encode: true;
-    }
+    this.getFileContent();
+  }
 
-    repo.writeFile('master','test.md','helloworld','test api', options)
+  getFileContent() {
+    let self =this;
+    let repo = this.gh.getRepo('mirioeggmann','blog.mirioeggmann.ch');
+    repo.getSha('master','test.md')
+      .then(function({data: answer}) {
+        console.log(answer.sha);
+        repo.getBlob(answer.sha).then(function({data: answerBlob}) {
+          console.log(answerBlob);
+          self.content = answerBlob;
+        });
+      });
+  }
+
+  writeFileContent() {
+    let self =this;
+    let repo = this.gh.getRepo('mirioeggmann','blog.mirioeggmann.ch');
+    let options = {
+      encode: true
+    };
+    repo.writeFile('master','test.md',self.content,'test api', options)
       .then(function({data: answer}) {
         console.log(answer);
       });
